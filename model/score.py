@@ -7,14 +7,11 @@ from utils import load_formulas
 
 def score_files(path_ref, path_hyp):
     """Loads result from file and score it
-
     Args:
         path_ref: (string) formulas of reference
         path_hyp: (string) formulas of prediction.
-
     Returns:
         scores: (dict)
-
     """
     # load formulas
     formulas_ref = load_formulas(path_ref)
@@ -36,14 +33,11 @@ def score_files(path_ref, path_hyp):
 
 def exact_match_score(references, hypotheses):
     """Computes exact match scores.
-
     Args:
         references: list of list of tokens (one ref)
         hypotheses: list of list of tokens (one hypothesis)
-
     Returns:
         exact_match: (float) 1 is perfect
-
     """
     exact_match = 0
     for ref, hypo in zip(references, hypotheses):
@@ -55,14 +49,11 @@ def exact_match_score(references, hypotheses):
 
 def bleu_score(references, hypotheses):
     """Computes bleu score.
-
     Args:
         references: list of list (one hypothesis)
         hypotheses: list of list (one hypothesis)
-
     Returns:
         BLEU-4 score: (float)
-
     """
     references = [[ref] for ref in references]  # for corpus_bleu func
     BLEU_4 = nltk.translate.bleu_score.corpus_bleu(
@@ -74,14 +65,11 @@ def bleu_score(references, hypotheses):
 
 def edit_distance(references, hypotheses):
     """Computes Levenshtein distance between two sequences.
-
     Args:
         references: list of list of token (one hypothesis)
         hypotheses: list of list of token (one hypothesis)
-
     Returns:
-        1 - levenshtein distance: (higher is better, 1 is perfect).
-
+        1 - levenshtein distance: (higher is better, 1 is perfect)
     """
     d_leven, len_tot = 0, 0
     for ref, hypo in zip(references, hypotheses):

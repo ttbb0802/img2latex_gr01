@@ -1,4 +1,3 @@
-# load checkpoint and evaluating
 from os.path import join
 from functools import partial
 import argparse

@@ -8,6 +8,8 @@ PAD_TOKEN = 1
 END_TOKEN = 2
 UNK_TOKEN = 3
 
+# buid sign2id
+
 
 class Vocab(object):
     def __init__(self):

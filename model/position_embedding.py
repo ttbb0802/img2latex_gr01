@@ -9,7 +9,6 @@ def add_positional_features(tensor: torch.Tensor,
     """
     Implements the frequency-based positional encoding described
     in `Attention is all you Need
-
     Parameters
     ----------
     tensor : ``torch.Tensor``
