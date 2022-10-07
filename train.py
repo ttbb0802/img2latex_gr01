@@ -1,5 +1,6 @@
 import argparse
 from functools import partial
+
 import torch
 import torch.optim as optim
 from torch.utils.data import DataLoader
@@ -109,6 +110,7 @@ def main():
     model = model.to(device)
     print("Model Settings:")
     print(model)
+
     # construct optimizer
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
 

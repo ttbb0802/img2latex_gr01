@@ -1,14 +1,13 @@
 import torch
 
 """
-beam_search
+Borrow from https://github.com/allenai/allennlp/blob/master/allennlp/nn/beam_search.py
 """
 
 
 class BeamSearch:
     """
     Implements the beam search algorithm for decoding the most likely sequences.
-
     Parameters
     ----------
     end_index : ``int``
@@ -41,7 +40,6 @@ class BeamSearch:
         """
         Given a starting state and a step function, apply beam search to find the
         most likely target sequences.
-
         Notes
         -----
         If your step function returns ``-inf`` for some log probabilities
@@ -51,7 +49,6 @@ class BeamSearch:
         with finite log probability (non-zero probability) returned by the step function.
         Therefore if you're using a mask you may want to check the results from ``search``
         and potentially discard sequences with non-finite log probability.
-
         Parameters
         ----------
         start_predictions : ``torch.Tensor``
@@ -75,7 +72,6 @@ class BeamSearch:
             the log probabilities of the tokens for the next step, and the second
             element is the updated state. The tensor in the state should have shape
             ``(group_size, *)``, where ``*`` means any other number of dimensions.
-
         Returns
         -------
         Tuple[torch.Tensor, torch.Tensor]
