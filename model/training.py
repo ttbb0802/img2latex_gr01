@@ -27,7 +27,7 @@ class Trainer(object):
         self.best_val_loss = 1e18
         self.device = torch.device("cuda" if use_cuda else "cpu")
         
-        wandb.init(project="Image to LaTex", name='encode-densenet')
+        wandb.init(project="Image to LaTex", name='test')
         wandb.config = {
             "learning_rate": self.args.lr,
             "min_learning_rate": self.args.min_lr,
