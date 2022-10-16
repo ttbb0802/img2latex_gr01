@@ -40,7 +40,7 @@ class Im2LatexModel(nn.Module):
         #     nn.ReLU(),
         #     nn.BatchNorm2d(enc_out_dim)
         # )
-        self.densenet = torch.hub.load('pytorch/vision:v0.10.0', 'densenet121', pretrained=True),
+        self.cnn_encoder = torch.hub.load('pytorch/vision:v0.10.0', 'densenet121', pretrained=True)
 
         self.rnn_decoder = nn.LSTMCell(dec_rnn_h+emb_size, dec_rnn_h)
         self.embedding = nn.Embedding(out_size, emb_size)
