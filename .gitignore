@@ -1,0 +1,7 @@
+__pycache__
+.vscode
+test.py
+data/formula_images_processed
+*.pkl
+wandb/*
+results/*
