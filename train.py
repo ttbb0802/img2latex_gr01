@@ -1,7 +1,7 @@
 import argparse
 from functools import partial
 from random import shuffle
-from torchinfo import summary
+
 import torch
 import torch.optim as optim
 from torch.utils.data import DataLoader
@@ -26,6 +26,8 @@ def main():
                         help="The hidden state of the decoder RNN")
     parser.add_argument("--data_path", type=str,
                         default="./data/", help="The dataset's dir")
+    parser.add_argument("--image_path", type=str,
+                        default="./data/", help="The images's dir")
     parser.add_argument("--add_position_features", action='store_true',
                         default=False, help="Use position embeddings or not")
     # training args
@@ -89,19 +91,22 @@ def main():
 
     # data loader
     print("Construct data loader...")
+    train_dataset = Im2LatexDataset(args.data_path, args.image_path, 'train', args.max_len)
+    val_dataset = Im2LatexDataset(args.data_path, args.image_path, 'validate', args.max_len)
+
     train_loader = DataLoader(
-        Im2LatexDataset(args.data_path, 'train', args.max_len),
+        train_dataset,
         batch_size=args.batch_size,
         collate_fn=partial(collate_fn, vocab.sign2id),
         pin_memory=True if use_cuda else False,
         shuffle=True if args.shuffle else False,
-        num_workers=4)
+        num_workers=2)
     val_loader = DataLoader(
-        Im2LatexDataset(args.data_path, 'validate', args.max_len),
+        val_dataset,
         batch_size=args.batch_size,
         collate_fn=partial(collate_fn, vocab.sign2id),
         pin_memory=True if use_cuda else False,
-        num_workers=4)
+        num_workers=2)
 
     # construct model
     print("Construct model")
@@ -114,7 +119,7 @@ def main():
     model = model.to(device)
     print("Model Settings:")
     print(model)
-    summary(model)
+
     # construct optimizer
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
 

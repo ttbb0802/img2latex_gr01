@@ -4,8 +4,18 @@ import math
 import torch
 import torch.nn.functional as F
 from torch.distributions.bernoulli import Bernoulli
+from torchvision import transforms
+
+from PIL import Image
 
 from build_vocab import PAD_TOKEN, UNK_TOKEN
+
+
+def load_and_transform_image(img_path):
+    transform = transforms.ToTensor()
+    image_tensor = transform(Image.open(img_path))
+
+    return image_tensor
 
 
 def collate_fn(sign2id, batch):
@@ -16,7 +26,7 @@ def collate_fn(sign2id, batch):
     # sort by the length of formula
     batch.sort(key=lambda img_formula: len(img_formula[1].split()),
                reverse=True)
-
+    
     imgs, formulas = zip(*batch)
     formulas = [formula.split() for formula in formulas]
     # targets for training , begin with START_TOKEN

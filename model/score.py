@@ -76,4 +76,4 @@ def edit_distance(references, hypotheses):
         d_leven += distance.levenshtein(ref, hypo)
         len_tot += float(max(len(ref), len(hypo)))
 
-    return 1. - d_leven / len_tot
+    return d_leven / len_tot
