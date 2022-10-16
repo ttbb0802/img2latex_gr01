@@ -7,6 +7,10 @@ START_TOKEN = 0
 PAD_TOKEN = 1
 END_TOKEN = 2
 UNK_TOKEN = 3
+
+# buid sign2id
+
+
 class Vocab(object):
     def __init__(self):
         self.sign2id = {"<s>": START_TOKEN, "</s>": END_TOKEN,
@@ -24,7 +28,8 @@ class Vocab(object):
     def __len__(self):
         return self.length
 
-def build_vocab(data_dir, min_count=10):
+
+def build_vocab(data_dir, min_count=1):
     """
     traverse training formulas to make vocab
     and store the vocab in the file
